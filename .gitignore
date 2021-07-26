@@ -2,3 +2,4 @@ api_trello.docx
 /design/
 /__pycache__/
 /env/
+cfg*.py

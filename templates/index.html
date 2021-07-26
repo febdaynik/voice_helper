@@ -4,7 +4,6 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>VoiceHelper</title>
-	<!-- <link rel="stylesheet" href="styles.css"> -->
 	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
@@ -26,7 +25,6 @@
 								<span class="input__file-button-text">Выбрать файл</span>
 							</label>
 						</div>
-						<!-- <input id="subclick" type="submit"> -->
 					</form>
 					<div class="loader">
 						<span></span>
@@ -42,12 +40,16 @@
 							</audio>
 						</div>
 					</div>
+					{% if answer_server[0] %}
 					<div class="block-message space">
 						<div class="label-audio block-link-task">
 							<p>{{ answer_server[0] }}</p>
+							<p class="error">{{ answer_server[2] }}</p>
 							<a href="{{ answer_server[1] }}">Ссылка на задачу</a>
 						</div>
 					</div>
+					{% endif %}
+
 					{% endif %}
 					</div>
 				</div>
@@ -64,9 +66,9 @@
 		labelVal = label.querySelector('.input__file-button-text').innerText;
 
 		input.addEventListener('change', function (e) {
-		let countFiles = '';
-		countFiles = this.files[0].name;
-		if (this.files[0].type == "audio/wav"){
+		let countFiles = this.files[0].name;
+		console.log(this.files[0])
+		if (this.files[0].type.split("/")[0] == "audio"){
 			if (countFiles){ label.querySelector('.input__file-button-text').innerText =countFiles; document.querySelector('.icon-file').className = 'icon-file sendfile'; document.querySelector('.loader').className = 'loader start'; document.querySelector('.voiceform').submit()}
 			else{ label.querySelector('.input__file-button-text').innerText = labelVal; document.querySelector('.icon-file').className = 'icon-file'}
 		}
