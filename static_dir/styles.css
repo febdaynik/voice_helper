@@ -1,0 +1,124 @@
+:root{
+	--de-black: #111;
+	--de-white: #fff;
+	--de-warning: #e04444;
+	--de-dark-gray: #9e9696;
+	--de-light-gray: #f1efef;
+	--de-gray: #dcdada;
+	--de-link-color: #548ed8;
+}
+
+*,*:before,*:after{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	transition: .5s all;
+}
+html,body{
+	height: 100%;
+}
+body{
+	font-family: "Roboto Condensed",sans-serif;
+	font-size: 13px;
+}
+a{
+	text-decoration: none;
+	color: var(--de-black);
+}
+h1{ font-size: 50px; margin-bottom: 20px; }
+.wrapper{
+	min-height: 100%;
+	position: relative;
+	background-color: var(--de-white);
+}
+.container{
+	max-width: 80%;
+	margin: 0 auto;
+}
+.content{ text-align: center; padding: 20px }
+.content-block{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+#file_input{ display: none; }
+.file_input-button{ cursor: pointer; }
+.input__file-block{ margin: 10px;  padding: 10px; border: 1px dashed #000; border-radius: 5px}
+.input__file-block:hover{ border-style: solid; border-radius: 0;}
+.icon-file, .icon-file svg{
+	width: 100px;
+	height: 50px;
+	margin: 0 auto;
+}
+.icon-file{ position: relative; }
+.icon-file.sendfile:before{
+	content: "✔";
+	padding-top: 1.5px;
+	color: #fff;
+	font-size: 12px;
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	background-color: #5153ff;
+	border-radius: 50%; 
+	top: -7px;
+	left: 23px;
+}
+.voiceform{
+	padding: 10px;
+	border-radius: 5px;
+	background-color: var(--de-light-gray);
+}
+
+.block-message{
+	text-align: left;
+	background-color: var(--de-light-gray);
+	border-radius: 5px;
+	padding: 15px;
+}
+.label-audio{
+	color: #5153ff;
+	font-weight: 700;
+	font-size: 15px;
+	margin: 10px 0;
+}
+.text-audio{ margin-left: 15px; margin-top: 5px; position: relative; margin-bottom: 10px;}
+.text-audio:before{
+	content: "";
+	position: absolute;
+	width: 2px;
+	height: 100%;
+	background-color: #5153ff;
+	left: -8px;
+
+}
+/*
+.block-audio{
+	background-color: #000;
+	margin-top: 8px;
+	height: 25px;
+}*/
+
+.loader{ display: none; }
+.loader.start{ display: block; }
+.loader span {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	border-radius: 100%;
+	background-color: #5153ff;
+	margin: 0 4px;
+	opacity: 0;
+}
+.loader span:nth-child(1) {animation: animloader 1s ease-in-out infinite;}
+.loader span:nth-child(2) {animation: animloader 1s ease-in-out 0.33s infinite;}
+.loader span:nth-child(3) {animation: animloader 1s ease-in-out 0.66s infinite;}
+@keyframes animloader{
+	0%, 100%{opacity: 0;}
+	60%{ opacity: 1;}
+}
+.space{ margin: 15px 0; }
+.block-link-task {text-align: center;}
+.block-link-task a{ font-weight: 500; text-decoration: underline; }
