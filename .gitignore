@@ -3,3 +3,5 @@ api_trello.docx
 /__pycache__/
 /env/
 cfg*.py
+/voice_msg/
+/libav-i686-w64-mingw32-20180108/

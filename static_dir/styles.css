@@ -45,7 +45,7 @@ h1{ font-size: 50px; margin-bottom: 20px; }
 
 #file_input{ display: none; }
 .file_input-button{ cursor: pointer; }
-.input__file-block{ margin: 10px;  padding: 10px; border: 1px dashed #000; border-radius: 5px}
+.input__file-block{ margin: 10px;  padding: 10px; border: 1px dashed #000; border-radius: 5px; cursor: pointer;}
 .input__file-block:hover{ border-style: solid; border-radius: 0;}
 .icon-file, .icon-file svg{
 	width: 100px;
@@ -70,8 +70,9 @@ h1{ font-size: 50px; margin-bottom: 20px; }
 	padding: 10px;
 	border-radius: 5px;
 	background-color: var(--de-light-gray);
+	display: flex;
 }
-
+.forms-voice{display: flex; column-gap: 20px; justify-content: center;}
 .block-message{
 	text-align: left;
 	background-color: var(--de-light-gray);
@@ -126,4 +127,12 @@ h1{ font-size: 50px; margin-bottom: 20px; }
     color: #f44336;
     font-size: 12px;
     margin: 10px;
+}
+.disabled{ display: none; }
+#startIcon{fill: #5153ff;}
+.iconStart{
+	background-color: #5153ff;
+	width: 35px;
+	height: 35px;
+	border-top-color: #5153ff transparent;
 }
