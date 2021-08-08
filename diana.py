@@ -1,10 +1,12 @@
 def split_word_task(word):
 	words = [
-		"выполняет задание", 
+		"выполняют задание", 
+		"выполняет задание",
 		"делает задание", 
 		"задание"
 	] 
 	dedline = [
+		"dadlani до",
 		"дедлайн до",
 		"дедлайн",
 		"завершить до", 
@@ -15,6 +17,7 @@ def split_word_task(word):
 		"до"
 	]
 	for task_word in words:
+		print("TASK WORD:",word.split(task_word).__len__() > 1, word.split(task_word))
 		if word.split(task_word).__len__() > 1:
 			task = [i.strip() for i in word.split(task_word)]; break
 
