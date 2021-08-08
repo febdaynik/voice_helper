@@ -27,6 +27,7 @@ function startRecording() {
 function stopRecording() {
 	recordButton.classList.toggle("disabled")
 	stopButton.classList.toggle("disabled")
+	document.querySelector('.voicerecorder_start').classList.toggle('sendfile')
 	recorder.stop();
 }
 
@@ -49,11 +50,11 @@ function sendVoice(form) {
 	document.querySelector('.loader').classList.toggle('start');
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState != 4) return;
+		let contentblock = document.querySelector('.content-block');
 		if (xhr.status == 200){
 			document.querySelector('.loader').classList.toggle('start');
 			answ = JSON.parse(xhr.response)
 			console.log(answ)
-			let contentblock = document.querySelector('.content-block');
 			if (answ.message){
 				contentblock.insertAdjacentHTML("beforeEnd", `<div class="block-message space">
 						<span class="label-audio">Текст из файла:</span><p class="text-audio">${ answ.message }</p>
@@ -65,13 +66,21 @@ function sendVoice(form) {
 					</div>`)
 			}
 			if (answ.answer_server && typeof(answ.answer_server) == "object"){
-				contentblock.insertAdjacentHTML("beforeEnd", `<div class="block-message space">
+				if (answ.answer_server.length == 2)
+					contentblock.insertAdjacentHTML("beforeEnd", `<div class="block-message space">
 						<div class="label-audio block-link-task">
 							<p>${ answ.answer_server[0] }</p>
-							<p class="error">${ answ.answer_server[2] }</p>
 							<a href="${ answ.answer_server[1] }">Ссылка на задачу</a>
 						</div>
 					</div>`)
+				else
+					contentblock.insertAdjacentHTML("beforeEnd", `<div class="block-message space">
+							<div class="label-audio block-link-task">
+								<p>${ answ.answer_server[0] }</p>
+								<p class="error">${ answ.answer_server[2]}</p>
+								<a href="${ answ.answer_server[1] }">Ссылка на задачу</a>
+							</div>
+						</div>`)
 			}
 			else if (answ.answer_server && typeof(answ.answer_server) == "string"){
 				contentblock.insertAdjacentHTML("beforeEnd", `<div class="block-message space">
@@ -81,7 +90,17 @@ function sendVoice(form) {
 					</div>`)
 			}
 		}
+		else {
+			document.querySelector('.loader').classList.toggle('start');
+			contentblock.insertAdjacentHTML("beforeEnd", `<div class="block-message space">
+				<div class="label-audio block-link-task">
+					<p>Произошла ошибка! Попробуйте ещё раз</p>
+				</div>
+			</div>`)
+		}
 	}
+	document.querySelector('.sendfile').classList.toggle('sendfile')
+	
 
 
 }

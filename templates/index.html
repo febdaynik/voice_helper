@@ -6,8 +6,11 @@
 	<title>VoiceHelper</title>
 	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
-<body>
-	
+<body class="white">
+	<script type="text/javascript">
+		const colorTheme = () => {document.body.className = localStorage.getItem('color-theme')!=null ? localStorage.getItem('color-theme') : "white"}
+		colorTheme();
+	</script>
 	<div class="wrapper">
 		<main class="page">
 			<div class="container">
@@ -47,51 +50,27 @@
 						<span></span>
 						<span></span>
 					</div>
-					{% if message %}
-					<div class="block-message space">
-						<span class="label-audio">Текст из файла:</span><p class="text-audio">{{ message }}</p>
-						<span class="label-audio">Аудио</span><div class="block-audio">
-							<audio controls>
-								<source src="{{ fn }}" type="audio/wav">
-							</audio>
-						</div>
-					</div>
-					{% if answer_server[0] %}
-					<div class="block-message space">
-						<div class="label-audio block-link-task">
-							<p>{{ answer_server[0] }}</p>
-							<p class="error">{{ answer_server[2] }}</p>
-							<a href="{{ answer_server[1] }}">Ссылка на задачу</a>
-						</div>
-					</div>
-					{% endif %}
 
-					{% endif %}
 					</div>
 				</div>
 			</div>
 		</main>
+		<div class="block-mode">
+			<input class="inputTheme" id="iTheme" type="checkbox" onchange="checkbox_change(this)">
+			<label class="forInputTheme" for="iTheme"></label>
+		</div>
 
 	</div>
 	<script type="text/javascript" src = "{{ url_for('static', filename='recorder.js') }}"></script>
-	<script>
-		
-		let input = document.querySelector('.input__file');
-
-		let label = input.nextElementSibling,
-		labelVal = label.querySelector('.input__file-button-text').innerText;
-
-		input.addEventListener('change', function (e) {
-		let countFiles = this.files[0].name;
-		console.log(this.files[0])
-		if (this.files[0].type.split("/")[0] == "audio"){
-			if (countFiles){ label.querySelector('.input__file-button-text').innerText =countFiles; document.querySelector('.icon-file').className = 'icon-file sendfile'; document.querySelector('.loader').className = 'loader start'; document.querySelector('.voiceform').submit()}
-			else{ label.querySelector('.input__file-button-text').innerText = labelVal; document.querySelector('.icon-file').className = 'icon-file'}
+	<script type="text/javascript" src = "{{ url_for('static', filename='script.js') }}"></script>
+	<script type="text/javascript">
+		if (localStorage.getItem("color-theme") == "black") document.querySelector('.inputTheme').checked = true;
+		else document.querySelector('.inputTheme').checked = false 
+		function checkbox_change(event) {
+			if (event.checked){ localStorage.setItem("color-theme","black"); colorTheme()}
+			else {localStorage.setItem("color-theme","white"); colorTheme()}
 		}
-		else{ label.querySelector('.input__file-button-text').innerText = "Файл не подходит"; document.querySelector('.icon-file').className = 'icon-file'}
-		});
-
-
 	</script>
+
 </body>
 </html>	

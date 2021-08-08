@@ -2,7 +2,6 @@ import speech_recognition as sr
 import subprocess, os
 
 def convert_audio(audio_input, audio_output):
-	cmds = ['ffmpeg', '-i', audio_input, audio_output]
 	os.system(f"ffmpeg -i {audio_input} {audio_output}")
 	return True
 
@@ -25,5 +24,7 @@ def voice_to_text(name_file):
 	except sr.UnknownValueError:
 		text = False
 		answer = "Ошибка! Звуковая дорожка пустая!"
+		os.remove(name_file_output) # удаление временного аудио-файла
+		
 	return text, name_file_output, answer
 
