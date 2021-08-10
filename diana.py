@@ -24,10 +24,3 @@ def split_word_task(word):
 	else:
 		task[1] = [task[1],None]
 		return task
-
-# GOOD:
-# a = split_word_task("Иванов делает задание покушать сделать до 21 апреля")
-# a = split_word_task("Иванов делает задание покушать")
-
-# BAD:
-# a = split_word_task("Иванов сделать до 21 апреля задание построить дом")
