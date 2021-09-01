@@ -62,9 +62,6 @@ def voice_recorder():
 
 	return jsonify({"message":message, "fn":file_name, "answer_server":answer})
 
-@app.route('/test', methods=['post'])
-def test():
-	return jsonify({"message":"Привет"})
 
 
 if __name__ == "__main__":

@@ -27,6 +27,7 @@ def split_word_task(word):
 	else:
 		task[1] = [task[1],None]
 		return task
+<<<<<<< HEAD
 
 # GOOD:
 # a = split_word_task("Иванов делает задание покушать сделать до 21 апреля")
@@ -61,3 +62,5 @@ def req_punctuation():
 	return req.json()
 
 print(req_punctuation())
+=======
+>>>>>>> d5146d02e5bcd9981c273150e0298d72bcf4c6a7
