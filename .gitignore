@@ -5,3 +5,4 @@ api_trello.docx
 cfg*.py
 /voice_msg/
 /libav-i686-w64-mingw32-20180108/
+*.wav

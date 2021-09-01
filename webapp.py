@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request, jsonify
 import voice, datetime, os, cfg_dev
 import api_trello as api
-from diana import split_word_task
-from deadline import deadline
+# from diana import split_word_task
+import test_trello
+
+from voice import FinderVoice
 
 app = Flask(__name__, static_folder="static_dir")
 app.config['UPLOAD_FOLDER'] = 'files/'
@@ -16,20 +18,22 @@ members_username = {
 def _trello(message):
 	# -------Запись на трелку------
 	now = datetime.datetime.now() # Текущее время
-	task = split_word_task(message)
+	# task = split_word_task(message)
+	task = ""
 
 	idList = api.getIdList(IdBoard = os.environ["BoardID"])
 	members = api.getMembers(IdBoard = os.environ["BoardID"])
-	try:
-		id_user = [i["id"] for i in members if i["username"] == members_username[task[0]]] # Получение ID пользователя исходя из фамилии
+	for index,name_ in enumerate(tasks[0]):
+		try:
+			id_user = [i["id"] for i in members if i["username"] == members_username[task[0]]] # Получение ID пользователя исходя из фамилии
 
-		card = api.newCard(name=task[1][0], IdList=idList[0]["id"], date_start=now, date_last=now+datetime.timedelta(days=30) if task[1][1] is None else deadline(now, task[1][1]), members=[ id_user ])
+			card = api.newCard(name=task[1][0], IdList=idList[0]["id"], date_start=now, date_last=now+datetime.timedelta(days=30) if task[1][1] is None else deadline(now, task[1][1]), members=[ id_user ])
 
-		answer = ["Задача была сохранена!",card['shortUrl']]
-	except Exception as e:
-		card = api.newCard(name=task[1][0], IdList=idList[0]["id"], date_start=now, date_last=now+datetime.timedelta(days=30) if task[1][1] is None else deadline(now, task[1][1]))
-		answer = ["Задача была сохранена!",card['shortUrl'],"Warning: не был соблюдён требуемый шаблон"]
-	return answer
+			# answer = ["Задача была сохранена!",card['shortUrl']]
+		except Exception as e:
+			card = api.newCard(name=task[1][0], IdList=idList[0]["id"], date_start=now, date_last=now+datetime.timedelta(days=30) if task[1][1] is None else deadline(now, task[1][1]))
+			# answer = ["Задача была сохранена!",card['shortUrl'],"Warning: не был соблюдён требуемый шаблон"]
+	# return answer
 	# -----------------------------
 
 
@@ -50,7 +54,12 @@ def voice_recorder():
 
 		f.save(file_name)
 		message, file_name, answer = voice.voice_to_text(file_name)
-		if not answer: answer = _trello(message)
+		print(message)
+		if not answer:
+			answer = voice.req_punctuation(message)["punctuation"]
+			text = answer.replace('<mark onclick="$(this).remove();">', "").replace('</mark>', "")
+			answer = test_trello.main(text)
+
 	return jsonify({"message":message, "fn":file_name, "answer_server":answer})
 
 @app.route('/test', methods=['post'])
