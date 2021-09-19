@@ -56,8 +56,7 @@ def voice_recorder():
 		message, file_name, answer = voice.voice_to_text(file_name)
 		print(message)
 		if not answer:
-			answer = voice.req_punctuation(message)["punctuation"]
-			text = answer.replace('<mark onclick="$(this).remove();">', "").replace('</mark>', "")
+			text = voice.dot_in_text(message)
 			answer = test_trello.main(text)
 
 	return jsonify({"message":message, "fn":file_name, "answer_server":answer})

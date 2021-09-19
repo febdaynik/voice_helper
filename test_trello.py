@@ -25,10 +25,10 @@ def main(text):
 	for index,name_ in enumerate(tasks[0]):
 		try:
 			id_user = [i["id"] for i in members if i["username"] == members_username[name_]] 
-			card = api.newCard(name=tasks[1][index], IdList=idList[0]["id"], date_start=now, date_last=now+datetime.timedelta(days=30)  if tasks[2][index] is None else deadline(now, task[2][index]), members=[ id_user ])
+			card = api.newCard(name=tasks[1][index], IdList=idList[0]["id"], date_start=now, date_last=now+datetime.timedelta(days=30)  if tasks[2][index] is None else deadline(now, tasks[2][index]), members=[ id_user ])
 			answer = f"Задача №{index+1} для {name_} добавлена"
 		except Exception as e:
-			card = api.newCard(name=tasks[1][index], IdList=idList[0]["id"], date_start=now, date_last=now+datetime.timedelta(days=30) if tasks[2][index] is None else deadline(now, task[2][index]))
+			card = api.newCard(name=tasks[1][index], IdList=idList[0]["id"], date_start=now, date_last=now+datetime.timedelta(days=30) if tasks[2][index] is None else deadline(now, tasks[2][index]))
 			answer = f"Задача №{index+1} для {name_} добавленна некорректно"
 
 	return answer
