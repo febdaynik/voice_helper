@@ -17,9 +17,9 @@ def voice_recorder():
 	if request.method == 'POST':
 		f = request.files['file']
 		if f.filename == "blob":
-			file_name = f'static_dir/files/{str(datetime.datetime.now().strftime("%Y%m%d%H%M%S%f"))}.ogg'
+			file_name = f'tmp/{str(datetime.datetime.now().strftime("%Y%m%d%H%M%S%f"))}.ogg'
 		else:
-			file_name = f'static_dir/files/{str(datetime.datetime.now().strftime("%Y%m%d%H%M%S%f"))}.{f.filename.split(".")[1]}'
+			file_name = f'tmp/{str(datetime.datetime.now().strftime("%Y%m%d%H%M%S%f"))}.{f.filename.split(".")[1]}'
 
 		f.save(file_name)
 		message, file_name, answer = voice.voice_to_text(file_name)
