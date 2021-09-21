@@ -32,10 +32,3 @@ def main(text):
 			answer = f"Задача №{index+1} для {name_} добавленна некорректно"
 
 	return answer
-		# print(id_user)
-
-	# print(id_user)
-	# answer = ["Задача была сохранена!",card['shortUrl']]
-
-
-	# print(answer)
