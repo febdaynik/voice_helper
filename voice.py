@@ -3,8 +3,6 @@ import subprocess, os
 import random, string
 
 def convert_audio(audio_input, audio_output):
-	try: os.mkdir("tmp")
-	except FileExistsError: pass
 	os.system(f"ffmpeg -i {audio_input} {audio_output}")
 	return True
 
