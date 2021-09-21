@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-import voice, datetime, os, cfg_dev
+import voice, datetime, os
 import api_trello as api
 import test_trello
 

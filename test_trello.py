@@ -1,4 +1,4 @@
-import cfg_dev, datetime, os
+import datetime, os
 import api_trello as api
 from deadline import deadline
 from voice import FinderVoice
