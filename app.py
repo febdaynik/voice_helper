@@ -15,6 +15,8 @@ def index():
 def voice_recorder():
 	message = ''; file_name = ''; answer = '';
 	if request.method == 'POST':
+		try: os.mkdir("tmp")
+		except FileExistsError: pass
 		f = request.files['file']
 		if f.filename == "blob":
 			file_name = f'tmp/{str(datetime.datetime.now().strftime("%Y%m%d%H%M%S%f"))}.ogg'
@@ -33,4 +35,4 @@ def voice_recorder():
 
 
 if __name__ == "__main__":
-	app.run()
+	app.run(debug=True)
